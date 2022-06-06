@@ -1,7 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require("packer").startup(function()
-	use "wbthomason/packer.nvim"
+  use "wbthomason/packer.nvim"
 
   use {
     "kyazdani42/nvim-web-devicons",
@@ -10,48 +10,43 @@ return require("packer").startup(function()
     end
   }
 
-	use {
-		"projekt0n/github-nvim-theme",
-		config = function()
-			require("github-theme").setup({
-				theme_style = "dark_default"
-			})
-		end
-	}
-
-	use {
-	    "kyazdani42/nvim-tree.lua",
-	    requires = {
-	      "kyazdani42/nvim-web-devicons",
-	    },
-	    tag = "nightly",
-	    config = function()
-		    require("nvim_tree_configs")
-	    end
-	}
-
-	use {
-		"akinsho/bufferline.nvim",
-		tag = "v2.*",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("bufferline_config")
-		end
-	}
-
   use {
-    "williamboman/nvim-lsp-installer",
+    "projekt0n/github-nvim-theme",
     config = function()
-      require("nvim-lsp-installer").setup({})
+      require("github-theme").setup({
+        theme_style = "dark_default"
+      })
     end
   }
 
-	use {
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("nvim_lsp_config_configs")
-		end
-	}
+  use {
+    "kyazdani42/nvim-tree.lua",
+    requires = "kyazdani42/nvim-web-devicons",
+    tag = "nightly",
+    config = function()
+      require("nvim_tree_configs")
+    end
+  }
+
+  use {
+    "akinsho/bufferline.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    tag = "v2.*",
+    config = function()
+      require("bufferline_config")
+    end
+  }
+
+  use {
+    "williamboman/nvim-lsp-installer",
+  }
+
+  use {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvim_lsp_config_configs")
+    end
+  }
 
   use "hrsh7th/cmp-nvim-lsp"
 
@@ -69,16 +64,16 @@ return require("packer").startup(function()
   }
 
   use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = function()
-        require("nvim_treesitter")
-      end
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require("nvim_treesitter")
+    end
   }
 
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("lualine_configs")
     end,
@@ -103,8 +98,8 @@ return require("packer").startup(function()
 
   use {
     "windwp/nvim-autopairs",
-    -- config = function()
-    --   require("nvim-autopairs").setup()
-    -- end
+    config = function()
+      require("nvim-autopairs").setup()
+    end
   }
 end)
