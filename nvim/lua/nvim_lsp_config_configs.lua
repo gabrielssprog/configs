@@ -1,3 +1,4 @@
+require("nvim-lsp-installer").setup({})
 local nvim_lsp = require("lspconfig")
 
 local lsp = vim.lsp
@@ -29,3 +30,5 @@ vim.diagnostic.config({
 })
 
 require("servers/tsserver")
+require("servers/html")
+require("servers/emmet_ls")

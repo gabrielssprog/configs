@@ -1,5 +1,3 @@
-local nvim_lsp = require("lspconfig")
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local opts = { noremap=true, silent=true }
@@ -9,7 +7,10 @@ local on_attach = function(client, bufnr)
   vim.cmd("nnoremap ge :lua vim.diagnostic.open_float()<CR>");
 end
 
-nvim_lsp.tsserver.setup {
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.html.setup {
   on_attach = on_attach,
-  handlers = handlers,
+  capabilities = capabilities,
 }
