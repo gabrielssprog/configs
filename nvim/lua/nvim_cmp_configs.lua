@@ -1,3 +1,4 @@
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp = require("cmp")
 local lspkind = require('lspkind')
 
@@ -25,3 +26,7 @@ cmp.setup({
     format = lspkind.cmp_format(),
   }
 })
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { text = "" } }))
+
+cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"

@@ -4,13 +4,13 @@ local on_attach = function(client, bufnr)
 
   vim.cmd("nnoremap gd :lua vim.lsp.buf.definition()<CR>");
   vim.cmd("nnoremap gh :lua vim.lsp.buf.hover()<CR>");
-  vim.cmd("nnoremap ge :lua vim.diagnostic.open_float()<CR>");
+  vim.cmd("nnoremap ge :lua vim.diagnostic.open_float(nil, { border = 'rounded' })<CR>");
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.html.setup {
+require("lspconfig").html.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-}
+})

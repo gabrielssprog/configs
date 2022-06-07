@@ -21,7 +21,6 @@ return require("packer").startup(function()
 
   use {
     "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons",
     tag = "nightly",
     config = function()
       require("nvim_tree_configs")
@@ -30,7 +29,6 @@ return require("packer").startup(function()
 
   use {
     "akinsho/bufferline.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
     tag = "v2.*",
     config = function()
       require("bufferline_config")
@@ -64,8 +62,8 @@ return require("packer").startup(function()
   }
 
   use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
     config = function()
       require("nvim_treesitter")
     end
@@ -73,7 +71,6 @@ return require("packer").startup(function()
 
   use {
     "nvim-lualine/lualine.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("lualine_configs")
     end,

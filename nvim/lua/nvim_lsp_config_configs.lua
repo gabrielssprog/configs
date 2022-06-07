@@ -1,6 +1,10 @@
 require("nvim-lsp-installer").setup({})
 local nvim_lsp = require("lspconfig")
 
+require("servers/tsserver")
+require("servers/html")
+require("servers/emmet_ls")
+
 local lsp = vim.lsp
 local handlers = lsp.handlers
 
@@ -28,7 +32,3 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = false,
 })
-
-require("servers/tsserver")
-require("servers/html")
-require("servers/emmet_ls")
