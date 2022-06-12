@@ -3,6 +3,7 @@ local nvim_lsp = require("lspconfig")
 
 require("servers/tsserver")
 require("servers/html")
+require("servers/cssls")
 require("servers/emmet_ls")
 
 local lsp = vim.lsp
