@@ -1,17 +1,23 @@
-require("plugins")
+local present, impatient = pcall(require, "impatient")
 
-vim.cmd("set mouse=a")
-vim.cmd("set number")
-vim.cmd("set nowrap")
-vim.cmd("set cursorline")
-vim.cmd("set termguicolors")
-vim.cmd("set tabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.cmd("set expandtab")
-vim.cmd("set noswapfile")
-vim.cmd("set nobackup")
-vim.cmd("set nowritebackup")
-vim.cmd("set hidden")
-vim.cmd("set title")
-vim.cmd("set laststatus=3")
-vim.cmd("set splitright")
+if present then
+   impatient.enable_profile()
+end
+
+require "core"
+require "core.utils"
+require "core.options"
+
+vim.defer_fn(function()
+   require("core.utils").load_mappings()
+end, 0)
+
+-- setup packer + plugins
+require("core.packer").bootstrap()
+require "plugins"
+
+local user_conf, _ = pcall(require, "custom")
+
+if user_conf then
+   require "custom"
+end

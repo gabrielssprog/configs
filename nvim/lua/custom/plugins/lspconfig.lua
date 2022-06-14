@@ -5,8 +5,7 @@ M.setup_lsp = function(attach, capabilities)
 
    -- lspservers with default config
    local servers = {
-     "tsserver",
-     "jdtls"
+     "tsserver"
    }
 
    for _, lsp in ipairs(servers) do
