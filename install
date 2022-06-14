@@ -23,11 +23,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 cp -r ~/configs/nvim ~/.config
 
-sudo npm install -g vscode-langservers-extracted
-sudo npm install -g typescript
-sudo npm install -g typescript-language-server
-sudo npm install -g emmet-ls
-
 echo "============ Installing starshipe ============"
 
 curl -sS https://starship.rs/install.sh | sh
