@@ -3,13 +3,8 @@ local M = {}
 M.setup_lsp = function(attach, capabilities)
    local lspconfig = require("lspconfig")
 
-   -- lspservers with default config
-   local servers = {
-     "tsserver"
-   }
-
-   for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
+   for _, server in ipairs(require("nvim-lsp-installer").get_installed_servers()) do
+      lspconfig[server.name].setup {
          on_attach = attach,
          capabilities = capabilities,
       }
