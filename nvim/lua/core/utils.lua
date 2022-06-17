@@ -6,8 +6,9 @@ local merge_tb = vim.tbl_deep_extend
 
 M.close_buffer = function(force)
    if vim.bo.buftype == "terminal" then
-      api.nvim_win_hide(0)
-      return
+      force = force or #api.nvim_list_wins() < 2 and ":bd!"
+      local swap = force and #api.nvim_list_bufs() > 1 and ":bp | bd!" .. fn.bufnr()
+      return vim.cmd(swap or force or "hide")
    end
 
    local fileExists = fn.filereadable(fn.expand "%p")
@@ -20,7 +21,6 @@ M.close_buffer = function(force)
    end
 
    force = force or not vim.bo.buflisted or vim.bo.buftype == "nofile"
-
    -- if not force, change to prev buf and then close current
    local close_cmd = force and ":bd!" or ":bp | bd" .. fn.bufnr()
    vim.cmd(close_cmd)
@@ -114,13 +114,6 @@ M.load_mappings = function(mappings, mapping_opt)
    end
 end
 
--- load plugin after entering vim ui
-M.packer_lazy_load = function(plugin)
-   vim.defer_fn(function()
-      require("packer").loader(plugin)
-   end, 0)
-end
-
 -- remove plugins defined in chadrc
 M.remove_default_plugins = function(plugins)
    local removals = M.load_config().plugins.remove or {}
@@ -154,6 +147,10 @@ end
 
 M.load_override = function(default_table, plugin_name)
    local user_table = M.load_config().plugins.override[plugin_name]
+
+   if type(user_table) == "function" then
+      user_table = user_table()
+   end
 
    if type(user_table) == "table" then
       default_table = merge_tb("force", default_table, user_table)
