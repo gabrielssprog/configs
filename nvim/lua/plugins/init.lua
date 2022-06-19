@@ -2,12 +2,11 @@ vim.cmd "packadd packer.nvim"
 
 local plugins = {
 
-   ["nvim-lua/plenary.nvim"] = {},
+   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
    ["wbthomason/packer.nvim"] = {},
    ["NvChad/extensions"] = {},
 
    ["NvChad/base46"] = {
-      after = "plenary.nvim",
       config = function()
          local ok, base46 = pcall(require, "base46")
 
@@ -44,6 +43,9 @@ local plugins = {
 
    ["lukas-reineke/indent-blankline.nvim"] = {
       opt = true,
+      setup = function()
+         require("core.lazy_load").on_file_open "indent-blankline.nvim"
+      end,
       config = function()
          require("plugins.configs.others").blankline()
       end,
@@ -61,10 +63,10 @@ local plugins = {
 
    ["nvim-treesitter/nvim-treesitter"] = {
       module = "nvim-treesitter",
-      cmd = { "TSInstall", "TSUninstall" },
       setup = function()
-         require("core.lazy_load").treesitter()
+         require("core.lazy_load").on_file_open "nvim-treesitter"
       end,
+      cmd = require("core.lazy_load").treesitter_cmds,
       run = ":TSUpdate",
       config = function()
          require "plugins.configs.treesitter"
@@ -86,8 +88,9 @@ local plugins = {
 
    ["williamboman/nvim-lsp-installer"] = {
       opt = true,
+      cmd = require("core.lazy_load").lsp_cmds,
       setup = function()
-         require("core.lazy_load").on_file_open()
+         require("core.lazy_load").on_file_open "nvim-lsp-installer"
       end,
    },
 

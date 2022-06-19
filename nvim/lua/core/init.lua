@@ -1,8 +1,10 @@
+-- commands
 vim.cmd "silent! command! NvChadUpdate lua require('nvchad').update_nvchad()"
 vim.cmd "silent! command! NvChadSnapshotCreate lua require('nvchad').snap_create()"
 vim.cmd "silent! command! NvChadSnapshotDelete lua require('nvchad').snap_delete()"
 vim.cmd "silent! command! NvChadSnapshotCheckout lua require('nvchad').snap_checkout()"
 
+-- autocmds
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Disable statusline in dashboard
@@ -24,4 +26,15 @@ autocmd("BufUnload", {
 autocmd("BufEnter", {
    pattern = "*",
    command = "set fo-=c fo-=r fo-=o",
+})
+
+autocmd("InsertLeave", {
+   callback = function()
+      if
+         require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+         and not require("luasnip").session.jump_active
+      then
+         require("luasnip").unlink_current()
+      end
+   end,
 })
