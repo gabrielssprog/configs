@@ -1,7 +1,12 @@
 local M = {}
 
 M.ui = {
-  theme = "ayu-dark",
+  hl_override = {
+    Normal = {
+      bg = "NONE"
+    }
+  },
+  theme = "ayu-dark"
 }
 
 M.plugins = {
