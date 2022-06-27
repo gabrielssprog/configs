@@ -1,20 +1,21 @@
 local M = {}
 
 M.ui = {
-  hl_override = {
-    Normal = {
-      bg = "NONE"
-    }
-  },
-  theme = "ayu-dark"
+  transparency = true,
+  theme = "ayu-dark",
+  tabufline = {
+    enabled = false
+  }
 }
+
+M.mappings = require("custom.mappings")
 
 M.plugins = {
   user = require("custom.plugins"),
   options = {
     lspconfig = {
      setup_lspconf = "custom.plugins.lspconfig",
-    },
+    }
   },
   override = {
     ["kyazdani42/nvim-tree.lua"] = {
